@@ -1,0 +1,19 @@
+Date: mié., 1 ene 2024
+
+
+
+ :: MOVIE ::
+ Title: Avatar
+ Genero: Ficción
+ Year: 2009
+ Creator: James Cameron
+ Duration: 161
+ Viewed: 2024-01-03 02:42:21.494
+
+ :: MOVIE ::
+ Title: Amélie
+ Genero: Romance
+ Year: 2001
+ Creator: Jean-Pierre Jeunet
+ Duration: 123
+ Viewed: 2024-01-03 02:42:54.359

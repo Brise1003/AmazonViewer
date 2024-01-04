@@ -1,18 +1,26 @@
 package com.anncode.amazonviewer.model;
 
+import com.anncode.amazonviewer.dao.MovieDao;
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Hereda de {@link Film}
  * Implementa de {@link IVisualizable}
  * */
 
-public class Movie extends Film implements IVisualizable {
+public class Movie extends Film implements IVisualizable, MovieDao {
 
 	private int id;
 	private int timeViewed;
+	private Timestamp dateTimeViewed;
 
+	public Movie() {
+
+	}
 
 	public Movie(String title, String genre, String creator, int duration, short year) {
 		super(title, genre, creator, duration);
@@ -24,12 +32,24 @@ public class Movie extends Film implements IVisualizable {
 		return id;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public int getTimeViewed() {
 		return timeViewed;
 	}
+
 	public void setTimeViewed(int timeViewed) {
 		this.timeViewed = timeViewed;
+	}
+
+	public Timestamp getDateTimeViewed() {
+		return dateTimeViewed;
+	}
+
+	public void setDateTimeViewed(Timestamp dateTimeViewed) {
+		this.dateTimeViewed = dateTimeViewed;
 	}
 
 	@Override
@@ -40,7 +60,10 @@ public class Movie extends Film implements IVisualizable {
 				"\n Genero: " + getGenre() +
 				"\n Year: " + getYear() +
 				"\n Creator: " + getCreator() +
-				"\n Duration: " + getDuration();
+				"\n Duration: " + getDuration() +
+				(Objects.nonNull(getDateTimeViewed())
+				? "\n Viewed: " + getDateTimeViewed()
+						: "");
 	}
 
 	/**
@@ -69,13 +92,8 @@ public class Movie extends Film implements IVisualizable {
 	}
 
 	public static ArrayList<Movie> makeMoviesList() {
-		ArrayList<Movie> movies = new ArrayList();
-
-		for (int i = 1; i <= 5; i++) {
-			movies.add(new Movie("Movie " + i, "Genero " + i, "Creador " + i, 120+i, (short)(2017+i)));
-		}
-
-		return movies;
+		Movie movie = new Movie();
+		return movie.read();
 	}
 
 	/**
@@ -84,7 +102,10 @@ public class Movie extends Film implements IVisualizable {
 	@Override
 	public void view() {
 		setViewed(true);
+		Movie movie = new Movie();
+		movie.setMovieViewed(this);
 		Date dateI = startToSee(new Date());
+
 
 		for (int i = 0; i < 100000; i++) {
 			System.out.println("..........");
